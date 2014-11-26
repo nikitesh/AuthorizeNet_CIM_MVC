@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace AuthorizeNet_Models
+namespace AuthorizeNet_Library
 {
     /// <summary>
     /// Helper class to send json response

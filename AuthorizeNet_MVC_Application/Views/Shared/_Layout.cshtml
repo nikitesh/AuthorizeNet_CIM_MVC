@@ -14,12 +14,10 @@
     <header>
         <div class="content-wrapper">
             <div class="float-left">
-                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+                <p class="site-title">@Html.ActionLink("AuthorizeNet CIM MVC Demo", "Index", "Home")</p>
             </div>
             <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
+                <section id="login"></section>
                 <nav>
                     <ul id="menu">
                         <li>@Html.ActionLink("Home", "Index", "Home")</li>
@@ -32,7 +30,7 @@
     </header>
     <div id="body">
         @RenderSection("featured", required: false)
-        <section class="content-wrapper main-content clear-fix">
+        <section class="content-wrapper clear-fix" style="padding-top:10px;">
             @RenderBody()
         </section>
         <div id="payform">

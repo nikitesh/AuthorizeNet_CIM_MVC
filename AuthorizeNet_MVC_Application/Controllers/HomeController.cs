@@ -1,10 +1,6 @@
 ﻿using AuthorizeNet;
 using AuthorizeNet_Library;
-using AuthorizeNet_Models;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Web;
 using System.Web.Mvc;
 
 namespace AuthorizeNet_MVC_Application.Controllers
@@ -38,7 +34,7 @@ namespace AuthorizeNet_MVC_Application.Controllers
         }
 
         [HttpPost]
-        public JsonResult SaveCustomerProfile(CustomerAccount customer)
+        public JsonResult SaveCustomerProfile(Customer customer)
         {
             return Json(CreateProfile(customer), JsonRequestBehavior.AllowGet);
         }
@@ -58,26 +54,14 @@ namespace AuthorizeNet_MVC_Application.Controllers
         /// Creates the customer profile.
         /// </summary>
         /// <param name="customer">The customer.</param>
-        private Message CreateProfile(CustomerAccount customer)
+        private Message CreateProfile(Customer customer)
         {
             string appPath = string.Format("{0}://{1}{2}", Request.Url.Scheme, Request.Url.Authority, Url.Content("~"));
+            string authNetUrl = "https://apitest.authorize.net/soap/v1/Service.asmx"; //https://api.authorize.net/soap/v1/Service.asmx for live
             try
             {
-                AuthorizeNetMerchant authMerchant = new AuthorizeNetMerchant() { Merchant_Key = "", Merchant_Name = "" };
-
-                if (authMerchant == null)
-                    return new Message { State = "Failed", Data = "Merchant not found" };
-
-                //Authorize.net Library Entity : Customer
-                Customer authCustomer = new CustomerProfileSetup().CreateCustomerProfile(customer);
-
-                if (authCustomer == null)
-                {
-                    //return a unique error code that client side recognizes that an error occurred while creating a profile payment on gateway
-                    return new Message { State = "Failed", Data = "Could not reach auth.net" };
-                }
-                string token = new CustomerProfileSetup().GetHostedProfilePage(authCustomer.ProfileID, appPath);
-
+                AuthorizeNetMerchant authMerchant = new AuthorizeNetMerchant { Merchant_Key = "26rLaK483ZCEf5cm", Merchant_Name = "4pmE98RwE" };
+                string token = new CustomerProfileSetup(authMerchant, authNetUrl).CreateCustomerProfile(customer, appPath);
                 string additionDetail = String.Format(@"{{ ""Token"": ""{0}""}}", token);
 
                 return new Message { State = "Success", Data = additionDetail };

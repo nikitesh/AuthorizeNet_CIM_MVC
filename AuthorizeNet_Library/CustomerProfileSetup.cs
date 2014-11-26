@@ -1,6 +1,6 @@
 ﻿using AuthorizeNet;
 using AuthorizeNet_Library.CustomerProfileWS;
-using AuthorizeNet_Models;
+using AuthorizeNet_Library;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,34 +12,51 @@ namespace AuthorizeNet_Library
 {
     public class CustomerProfileSetup
     {
-        private const ServiceMode serviceMode = ServiceMode.Test;
-        private const string AuthNetUrl = "https://apitest.authorize.net/soap/v1/Service.asmx"; //https://api.authorize.net/soap/v1/Service.asmx for live
-        private AuthorizeNetMerchant AuthNetMerchant = new AuthorizeNetMerchant { Merchant_Key = "26rLaK483ZCEf5cm", Merchant_Name = "4pmE98RwE" };
+        private ServiceMode serviceMode;
+        private string AuthNetUrl;
+        private AuthorizeNetMerchant AuthNetMerchant;
+        //= new AuthorizeNetMerchant { Merchant_Key = "26rLaK483ZCEf5cm", Merchant_Name = "4pmE98RwE" };
 
-        
+        public CustomerProfileSetup(AuthorizeNetMerchant authMerchant, string AuthNetUrl)
+        {
+            if (string.IsNullOrEmpty(AuthNetUrl))
+                throw new ArgumentNullException("AuthNetUrl argument is null.");
+            if (authMerchant == null)
+                throw new ArgumentNullException("Authorize merchant argument is null.");
+
+            this.serviceMode = authMerchant.IsTest == true ? ServiceMode.Test : ServiceMode.Live;
+            this.AuthNetUrl = AuthNetUrl;
+            this.AuthNetMerchant = authMerchant;
+        }
 
         /// <summary>
         /// Create Customer in Payment Gateway
         /// </summary>
         /// <returns> Customer  </returns>
-        public Customer CreateCustomerProfile(CustomerAccount parkerAccount)
+        public string CreateCustomerProfile(Customer customerAccount, string appPath)
         {
-            return this.CreateCustomerProfile(parkerAccount.Email, parkerAccount.Details);
+            return this.CreateCustomerProfile(customerAccount.Email, customerAccount.Description, appPath);
         }
 
-        public Customer CreateCustomerProfile(string Email, string Description)
+        public string CreateCustomerProfile(string Email, string Description, string appPath)
         {
             try
             {
                 AuthorizeNet.CustomerGateway customerGateway = new AuthorizeNet.CustomerGateway(AuthNetMerchant.Merchant_Name, AuthNetMerchant.Merchant_Key, serviceMode);
                 Customer customer = customerGateway.CreateCustomer(Email, Description);
-                return customer;
 
+                if (customer == null)
+                {
+                    throw new ArgumentNullException("Customer");
+                }
+                string token = this.GetHostedProfilePage(customer.ProfileID, appPath);
+                return token;
             }
-            catch (Exception)
+            catch (Exception ex)
             {
-                throw;
+                throw ex;
             }
+
         }
         public string GetHostedProfilePage(string customerProfileID, string siteBaseURL)
         {
@@ -52,7 +69,7 @@ namespace AuthorizeNet_Library
                 st.settingName = "hostedProfileIFrameCommunicatorUrl";
                 //get the base address of the site
 
-                st.settingValue = siteBaseURL + "/Parker/IframeCommunicator";
+                st.settingValue = siteBaseURL + "/Home/IframeCommunicator";
                 SettingType[] setArray = new SettingType[1];
                 setArray[0] = st;
 

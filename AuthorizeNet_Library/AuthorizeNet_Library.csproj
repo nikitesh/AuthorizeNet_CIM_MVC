@@ -37,6 +37,7 @@
       <HintPath>AuthorizeNetDLL\AuthorizeNet.Helpers.dll</HintPath>
     </Reference>
     <Reference Include="System" />
+    <Reference Include="System.ComponentModel.DataAnnotations" />
     <Reference Include="System.Core" />
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
@@ -48,6 +49,8 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="CustomerProfileSetup.cs" />
+    <Compile Include="Models\AuthorizeNetMerchant.cs" />
+    <Compile Include="Models\Message.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Service References\CustomerProfileWS\Reference.cs">
       <AutoGen>True</AutoGen>
@@ -166,12 +169,6 @@
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
-  </ItemGroup>
-  <ItemGroup>
-    <ProjectReference Include="..\AuthorizeNet_Models\AuthorizeNet_Models.csproj">
-      <Project>{75ce9434-3511-49ab-93ac-36132f38e853}</Project>
-      <Name>AuthorizeNet_Models</Name>
-    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

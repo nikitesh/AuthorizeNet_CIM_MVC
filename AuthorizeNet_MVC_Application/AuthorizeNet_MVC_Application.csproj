@@ -255,7 +255,15 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="favicon.ico" />
+    <Content Include="fonts\quicksand-regular-webfont.svg" />
+    <Content Include="fonts\sourcesanspro-regular-webfont.svg" />
     <Content Include="Global.asax" />
+    <Content Include="fonts\sourcesanspro-regular-webfont.eot" />
+    <Content Include="fonts\sourcesanspro-regular-webfont.ttf" />
+    <Content Include="fonts\sourcesanspro-regular-webfont.woff" />
+    <Content Include="fonts\quicksand-regular-webfont.eot" />
+    <Content Include="fonts\quicksand-regular-webfont.ttf" />
+    <Content Include="fonts\quicksand-regular-webfont.woff" />
     <None Include="Scripts\jquery-1.8.2.intellisense.js" />
     <Content Include="Scripts\jquery-1.8.2.js" />
     <Content Include="Scripts\jquery-1.8.2.min.js" />
