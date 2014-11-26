@@ -1,0 +1,100 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <title>@ViewBag.Title - My ASP.NET MVC Application</title>
+    <link href="~/favicon.ico" rel="shortcut icon" type="image/x-icon" />
+    <meta name="viewport" content="width=device-width" />
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+    <script src="~/Scripts/popup.js"></script>
+    <link href="~/Content/manage.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <header>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p class="site-title">@Html.ActionLink("your logo here", "Index", "Home")</p>
+            </div>
+            <div class="float-right">
+                <section id="login">
+                    @Html.Partial("_LoginPartial")
+                </section>
+                <nav>
+                    <ul id="menu">
+                        <li>@Html.ActionLink("Home", "Index", "Home")</li>
+                        <li>@Html.ActionLink("Create Customer", "CreateCustomerProfile", "Home")</li>
+                        <li>@Html.ActionLink("Contact", "Contact", "Home")</li>
+                    </ul>
+                </nav>
+            </div>
+        </div>
+    </header>
+    <div id="body">
+        @RenderSection("featured", required: false)
+        <section class="content-wrapper main-content clear-fix">
+            @RenderBody()
+        </section>
+        <div id="payform">
+            <!--
+            INSTRUCTIONS:
+                            https://test.authorize.net/profile/manage
+            Put this hidden <form> anywhere on your page with the token from the GetHostedProfilePage API call.
+            -->
+            <form method="post" action="https://secure.authorize.net/profile/manage" id="formAuthorizeNetPopup" name="formAuthorizeNetPopup" target="iframeAuthorizeNet" style="display: none;">
+                <input type="hidden" id="authinput" name="Token" value="" />
+            </form>
+
+
+        </div>
+
+
+    </div>
+
+    <!--
+    INSTRUCTIONS:
+    Put this divAuthorizeNetPopup section right before the closing </body> tag. The popup will be centered inside the whole browser window.
+    If you want the popup to be centered inside some other element such as a div, put it inside that element.
+    -->
+    <div id="divAuthorizeNetPopup" style="display: none;" class="AuthorizeNetPopupGrayFrameTheme">
+        <div class="AuthorizeNetPopupOuter">
+            <div class="AuthorizeNetPopupTop">
+                <div class="AuthorizeNetPopupClose">
+                    <a href="javascript:;" onclick="AuthorizeNetPopup.closePopup();" title="Close"></a>
+                </div>
+            </div>
+            <div class="AuthorizeNetPopupInner">
+                <iframe name="iframeAuthorizeNet" id="iframeAuthorizeNet" src="" frameborder="0" scrolling="yes"></iframe>
+            </div>
+            <div class="AuthorizeNetPopupBottom">
+                <div class="AuthorizeNetPopupLogo" title="Powered by Authorize.Net"></div>
+            </div>
+        </div>
+        <div class="AuthorizeNetShadow AuthorizeNetShadowT"></div>
+        <div class="AuthorizeNetShadow AuthorizeNetShadowR"></div>
+        <div class="AuthorizeNetShadow AuthorizeNetShadowB"></div>
+        <div class="AuthorizeNetShadow AuthorizeNetShadowL"></div>
+        <div class="AuthorizeNetShadow AuthorizeNetShadowTR"></div>
+        <div class="AuthorizeNetShadow AuthorizeNetShadowBR"></div>
+        <div class="AuthorizeNetShadow AuthorizeNetShadowBL"></div>
+        <div class="AuthorizeNetShadow AuthorizeNetShadowTL"></div>
+    </div>
+
+    <!--
+    INSTRUCTIONS:
+    Put this divAuthorizeNetPopupScreen section right before the closing </body> tag.
+    -->
+    <div id="divAuthorizeNetPopupScreen" style="display: none;"></div>
+
+    <footer>
+        <div class="content-wrapper">
+            <div class="float-left">
+                <p>&copy; @DateTime.Now.Year - My ASP.NET MVC Application</p>
+            </div>
+        </div>
+    </footer>
+
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+</body>
+</html>

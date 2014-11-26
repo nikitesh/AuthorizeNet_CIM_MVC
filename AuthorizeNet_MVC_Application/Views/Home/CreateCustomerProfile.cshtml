@@ -1,0 +1,77 @@
+﻿@model AuthorizeNet_Models.CustomerAccount
+
+@{
+    ViewBag.Title = "CreateCustomerProfile";
+}
+
+<script type="text/javascript">
+    function successfulCustomerSave(data) {
+        if (data.State.toLowerCase() == 'success') { //Checked for Message code based on which the iframeAuthorizeNet iframe will be visible
+
+            var jsonAdditionalDetail = JSON.parse(data.Data)
+
+            var token = jsonAdditionalDetail.Token;
+
+            $("#authinput").attr("value", token);
+
+            $("#iframeAuthorizeNet").attr("src", '/Home/Empty');
+            AuthorizeNetPopup.openAddPaymentPopup();
+            if (console != null) {
+                console.log("Token from Authorize.net : " + token);
+            }
+        }
+        else {
+            alert(data.Data);
+        }
+    }
+
+
+
+    function saveCustomerFailure(data, jqXHR, textStatus)
+    { AjaxTimeout(textStatus); }
+</script>
+
+<h2>CreateCustomerProfile</h2>
+
+@using (Ajax.BeginForm("SaveCustomerProfile", "Home", null, new AjaxOptions
+                                                       {
+                                                           InsertionMode = InsertionMode.Replace,
+                                                           HttpMethod = "Post",
+                                                           OnSuccess = "successfulCustomerSave",
+                                                           OnFailure = "saveCustomerFailure"
+                                                       }, new { id = "frmRegisterUser" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+
+    <fieldset>
+        <legend>CustomerAccount</legend>
+
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Email)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Email)
+            @Html.ValidationMessageFor(model => model.Email)
+        </div>
+        <div class="editor-label">
+            @Html.LabelFor(model => model.Details)
+        </div>
+        <div class="editor-field">
+            @Html.EditorFor(model => model.Details)
+            @Html.ValidationMessageFor(model => model.Details)
+        </div>
+        <p>
+            <input type="submit" value="Create" />
+        </p>
+    </fieldset>
+}
+
+<div>
+    @Html.ActionLink("Back to home", "Index")
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

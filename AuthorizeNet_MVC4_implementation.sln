@@ -1,0 +1,32 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2012
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizeNet_Library", "AuthorizeNet_Library\AuthorizeNet_Library.csproj", "{89949FB8-4E74-41A6-A112-68E1183C863C}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizeNet_MVC_Application", "AuthorizeNet_MVC_Application\AuthorizeNet_MVC_Application.csproj", "{DCBB81C1-1958-497A-9D73-27DD48E9D5CF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AuthorizeNet_Models", "AuthorizeNet_Models\AuthorizeNet_Models.csproj", "{75CE9434-3511-49AB-93AC-36132F38E853}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{89949FB8-4E74-41A6-A112-68E1183C863C}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{89949FB8-4E74-41A6-A112-68E1183C863C}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{89949FB8-4E74-41A6-A112-68E1183C863C}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{89949FB8-4E74-41A6-A112-68E1183C863C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DCBB81C1-1958-497A-9D73-27DD48E9D5CF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DCBB81C1-1958-497A-9D73-27DD48E9D5CF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DCBB81C1-1958-497A-9D73-27DD48E9D5CF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DCBB81C1-1958-497A-9D73-27DD48E9D5CF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{75CE9434-3511-49AB-93AC-36132F38E853}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{75CE9434-3511-49AB-93AC-36132F38E853}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{75CE9434-3511-49AB-93AC-36132F38E853}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{75CE9434-3511-49AB-93AC-36132F38E853}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
